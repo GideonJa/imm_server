@@ -1,0 +1,34 @@
+<% if @users.blank? %>
+  <h1>Sorry no user were found </h1>
+<%else%>
+  <h1>Listing users</h1>
+
+  
+  <table>
+    <tr>
+      <th>Person</th>
+      <th>State</th>
+      <th>Status</th>
+      <th>Severity</th>
+      <th></th>
+    </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.person_id %></td>
+      <td><%= user.state %></td>
+      <td><%= user.status %></td>
+      <td><%= user.severity %></td>
+      <td><%= link_to 'Show', user %></td>
+      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+
+<%end %>
+<%= link_to 'back', root_path %>
+<%= link_to 'new', new_user_path %>
