@@ -18,12 +18,14 @@ class UsersController < ApplicationController
     @url = request.original_url
 
     u = URI.parse(@url)
-    p = CGI.parse(u.query)
+    p = CGI.parse(u.query) if u && u.query
     
-    @person_id = p['person_id'].first
-    @state = p['state'].first
+    if p 
+      @person_id = p['person_id'].first
+      @state = p['state'].first
 
-    @users = User.where(person_id: @person_id, state: @state)
+      @users = User.where(person_id: @person_id, state: @state)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
